@@ -2,6 +2,7 @@ package router
 
 import (
 	"im/middlewares"
+	"im/models"
 	"im/service"
 
 	"github.com/gin-gonic/gin"
@@ -9,13 +10,13 @@ import (
 
 func Router() *gin.Engine {
 	r := gin.Default()
-
+	//MySQL启动
+	models.Init()
 	//用户登录
 	r.POST("/login", service.Login)
 
 	//发送验证码
 	r.POST("/send/code", service.SendCode)
-
 	//用户注册
 	r.POST("/register", service.Register)
 	auth := r.Group("/u", middlewares.AuthCheck())
@@ -32,5 +33,12 @@ func Router() *gin.Engine {
 	auth.POST("/user/add", service.UserAdd)
 	//删除好友
 	auth.DELETE("/user/delete", service.UserDelete)
+
+	// 视频流信息读取
+	r.GET("/douyin/publish/list/", service.PublishLists)
+	// 点赞列表查询
+	auth.GET("/user/favorite/list/", service.FavoriteList)
+	// 点赞功能
+	auth.POST("/user/favorite/action/", service.FavoriteAction)
 	return r
 }

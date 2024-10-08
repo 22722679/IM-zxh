@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	"im/define"
+	"im/config"
 	"im/helper"
 	"im/models"
 	"log"
@@ -137,7 +137,7 @@ func SendCode(c *gin.Context) {
 		})
 		return
 	}
-	if err = models.RDB.Set(context.Background(), define.RegisterPrefix+email, code, time.Second*time.Duration(define.ExpireTime)).Err(); err != nil {
+	if err = models.RDB.Set(context.Background(), config.RegisterPrefix+email, code, time.Second*time.Duration(config.ExpireTime)).Err(); err != nil {
 		log.Printf("[ERROR]:#{err}\n")
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -182,7 +182,7 @@ func Register(c *gin.Context) {
 		return
 	}
 	//验证码是否正确
-	r, err := models.RDB.Get(context.Background(), define.RegisterPrefix+email).Result()
+	r, err := models.RDB.Get(context.Background(), config.RegisterPrefix+email).Result()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,
@@ -354,7 +354,7 @@ func UserDelete(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
-		"msg": "删除成功",
+		"msg":  "删除成功",
 	})
 }
 

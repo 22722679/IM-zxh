@@ -1,7 +1,7 @@
 package service
 
 import (
-	"im/define"
+	"im/config"
 	"im/helper"
 	"im/models"
 	"log"
@@ -28,7 +28,7 @@ func WebsocketMessage(c *gin.Context) {
 	uc := c.MustGet("user_claims").(*helper.UserClaims)
 	wc[uc.Identity] = conn
 	for {
-		ms := new(define.MessageStruct)
+		ms := new(config.MessageStruct)
 		err := conn.ReadJSON(ms)
 		if err != nil {
 			log.Printf("Read Error:%v\n", err)
@@ -51,7 +51,7 @@ func WebsocketMessage(c *gin.Context) {
 		err = models.InsertOneMessageBasic(mb)
 		if err != nil {
 			log.Printf("[DB ERROR]:%v\n", err)
-			return 
+			return
 		}
 		// TODO: 获取在特定房间的在线用户
 		userRooms, err := models.GetUserRoomByRoomIdentity(ms.RoomIdentity)
