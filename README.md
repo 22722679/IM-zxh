@@ -69,7 +69,7 @@ IM即时通讯项目
 ## 安装步骤
 1. 下载源码
 ```sh
-git clone https://github.com/22722679/douyin-project.git
+git clone https://github.com/22722679/IM-zxh.git
 ```
 2. 配置相关服务器地址等相关参数(项目为本地IP)
 3. 启动服务
