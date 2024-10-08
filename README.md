@@ -94,9 +94,9 @@ go rum main.gro
 ## 视频流的逻辑演示视频（不包括用户的即时通讯）
 [![Watch the video](https://lf3-static.bytednsdoc.com/obj/eden-cn/wthJoabvf_lm_tyvmahsWgpi/ljhwZthlaukjlkulzlp/images/introduce.png)](https://www.douyin.com/video/7274510760062111011)
 ## 使用到的相关技术
--框架相关：
+### 框架相关：
  - [Gin](https://gin-gonic.com/docs/)
--数据库：
+### 数据库：
  - [MySQL](https://dev.mysql.com/doc/)
  - [MongoDB](https://www.mongodb.com/try/download/shell)
 ## 版本控制
