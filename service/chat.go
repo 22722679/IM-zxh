@@ -9,6 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var MS []*models.MessageBasic 
+
 func ChatList(c *gin.Context) {
 	roomIdentity := c.Query("room_identity")
 	if roomIdentity == "" {
@@ -35,6 +37,7 @@ func ChatList(c *gin.Context) {
 
 	//聊天记录查询
 	data, err := models.GetMessageListByRoomIdentity(roomIdentity, &pageSize, &skip)
+	MS = data
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,

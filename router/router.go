@@ -1,17 +1,34 @@
 package router
 
 import (
+	"fmt"
 	"im/middlewares"
 	"im/models"
 	"im/service"
+	"sync"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Router() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	//MySQL启动
 	models.Init()
+
+	//用户消息服务发现
+	var ww sync.WaitGroup
+	ww.Add(1)
+	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				fmt.Println("恢复", err)
+			}
+			ww.Done()
+		}()
+		service.MessageFind()
+	}()
+
 	//用户登录
 	r.POST("/login", service.Login)
 
@@ -40,5 +57,8 @@ func Router() *gin.Engine {
 	auth.GET("/user/favorite/list/", service.FavoriteList)
 	// 点赞功能
 	auth.POST("/user/favorite/action/", service.FavoriteAction)
+
+	//ww.Wait()	
 	return r
 }
+

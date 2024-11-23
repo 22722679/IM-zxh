@@ -45,3 +45,7 @@ var CosBucket = "https://lj-1307665894.cos.ap-nanjing.myqcloud.com/"
 const Port = 8080
 
 
+//zookeeper 登录
+
+const zkIP = "192.169.28.131:2181"
+const zkIPs = "192.169.28.131"
