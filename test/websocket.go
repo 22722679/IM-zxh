@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
-
+	
 var addr = flag.String("addr", "localhost:8080", "http service address") //服务端地址
 
 var upgrader = websocket.Upgrader{} //  将http分解为websocket
